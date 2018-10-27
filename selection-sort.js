@@ -1,26 +1,22 @@
-const testArray = [6, -100, 4, 0, -2, 11, 2, -10000, 1];
-const resultArray = [];
+const testArray = [6, -100, 4, 999, -10000, 123];
 
 const selectionSort = (array) => {
-  if (!array.length) {
-    return resultArray;
-  }
+  for(let i = 0; i < array.length; i++) {
+    let minIndex = i;
+    let value = array[i];
 
-  let value = array[0];
-  let index = 0;
-
-  for (let i = 0; i < array.length;  i++) {
-    if (value > array[i + 1]) {
-      value = array[i + 1];
-      index = i + 1;
+    for (let j = i; j < array.length;  j++) {
+      if (value > array[j]) {
+        value = array[j];
+        minIndex = j;
+      }
     }
+
+    array[minIndex] = array[i];
+    array[i] = value;
   }
 
-  resultArray.push(value);
-  array.splice(index, 1);
-  selectionSort(array);
-
-  return resultArray;
+  return array;
 };
 
 console.log(selectionSort(testArray));
